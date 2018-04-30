@@ -1,0 +1,755 @@
+<html>
+<head>
+<title>ILC Calendar</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<style type="text/css">
+<!--
+p {  font-family: Geneva, Arial, Helvetica, sans-serif; margin-right: 15%; margin-left: 15%}
+a {  color: #333399}
+a:active { color: #FF9933 }
+a:visited { color: #333366 }
+-->
+</style>
+
+<script language="JavaScript">
+<!--
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_findObj(n, d) { //v3.0
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</script>
+</head>
+
+<body bgcolor="#FFFFFF" 
+onLoad="MM_preloadImages('images/nav/overview_over.gif',
+'images/nav/survey_over.gif',
+'images/nav/guidelines_over.gif',
+'images/nav/calendar_over.gif')">
+
+<table border="0" cellpadding="0" cellspacing="0" width="750" align="center">
+
+
+  <tr valign="top"><!-- row 2 -->
+   <td colspan="6"><img name="ilc_r2_c1" src="images/nav/ilc_r2_c1.gif" width="750" height="145" border="0"
+   alt="Inclusive Learning Connection"></td>
+   <td><img src="images/nav/shim.gif" width="1" height="145" border="0" alt="place holder"></td>
+  </tr>
+  
+  <tr valign="top"><!-- row 3 -->
+   <td><a href="index.html">
+   <img name="home" src="images/nav/ilc_r3_c1.gif" width="133" height="49" border="0"
+   alt="Home" 
+   onMouseOut="MM_swapImgRestore()" 
+   onMouseOver="MM_swapImage('home','','images/nav/home_over.gif',1)">
+   </a></td>
+   
+   <td><a href="overview.html">
+   <img name="overview" src="images/nav/ilc_r3_c2.gif" width="164" height="49" border="0"
+   alt="Project Overview" 
+   onMouseOut="MM_swapImgRestore()" 
+   onMouseOver="MM_swapImage('overview','','images/nav/overview_over.gif',1)">
+   </a></td>
+   
+   <td><a href="survey.html">
+   <img name="survey" src="images/nav/ilc_r3_c3.gif" width="125" height="49" border="0"
+   alt="Survey" 
+   onMouseOut="MM_swapImgRestore()" 
+   onMouseOver="MM_swapImage('survey','','images/nav/survey_over.gif',1)">
+   </a></td>
+   
+   <td><a href="guidelines.html">
+   <img name="guidelines" src="images/nav/ilc_r3_c4.gif" width="142" height="49" border="0"
+   alt="LT Guidelines" 
+   onMouseOut="MM_swapImgRestore()" 
+   onMouseOver="MM_swapImage('guidelines','','images/nav/guidelines_over.gif',1)">
+   </a></td>
+   
+   <td><a href="calendar.html">
+   <img name="calendar" src="images/nav/calendar_current.gif" width="124" height="49" border="0" 
+   alt="Calendar" 
+   onMouseOut="MM_swapImgRestore()" 
+   onMouseOver="MM_swapImage('calendar','','images/nav/calendar_current.gif',1)">
+   </a></td>
+   
+   <td><img name="ilc_r3_c6" src="images/nav/ilc_r3_c6.gif" width="62" height="49" border="0" alt="end navigation"></td>
+   <td><img src="images/nav/shim.gif" width="1" height="49" border="0" alt="place holder"></td>
+  </tr>
+
+</table>
+
+<p style="background-color : #cccccc"><a href="index.html">Home</a> > 
+<a href="calendar.html">Calendar</a></p>
+
+ <script language="JavaScript">
+<!--
+
+
+// font point size chart
+// size 1 	=  8pt
+// size 2	= 10pt
+// size 3	= 12pt
+// size 4	= 14pt
+// size 5	= 18pt
+// size 6	= 24pt
+
+
+// ---------------------------------------------------------------------------
+// boolean flag controlling is prev/next month text is displayed
+var mbDisplayDeadText = false;
+var mbDisplayDeadNumber = false;
+var mbDisplayMonthCombo = true;
+var mbDisplayYearCombo = true;
+
+// ---------------------------------------------------------------------------
+// initialization
+
+var R = "\r\n";
+var Q = "\"";
+
+var mclrBlack =		"#000000";
+var mclrWhite =		"#ffffff";
+var mclrDeadWhite = 	"#fffffe";
+var mclrOffWhite = 	"#e1e1e1";
+var mclrLightGray = 	"#c0c0c0";
+var mclrGray =		"#888888";
+
+var mclrYellow =        "#ffe1c0";
+var mclrPurple =	"#ff00ff";
+var mclrBlue =		"#0000ff";
+var mclrRed =		"#ff0000";
+var mclrGreen =		"#00ff00";
+var mclrPink =		"#ffc0c0";
+
+var mclrLightYellow =	"#ffffc0";
+var mclrLightOrange =	"#e1e1c0";
+
+var mclrDarkPurple =	"#880088";
+var mclrDarkBlue =	"#003366";
+var mclrDarkRed =	"#880000";
+var mclrDarkGreen =	"#008800";
+
+// ---------------------------------------------------------------------------
+// custom sizes, colors and fonts
+
+var mclrTableBg  = mclrDeadWhite;     // table background DO NOT CHANGE
+var mclrDead	 = mclrOffWhite;     // background date cell color - unused this month
+var mclrNow	 = mclrLightYellow;   // background date cell color - the current date
+var mclrPast	 = mclrLightGray;      // background date cell color - previous dates
+var mclrFuture	 = mclrWhite;         // background date cell color - future dates
+var mclrBorder	 = mclrDarkBlue;       // border color of calendar
+
+var mnCellWidth  = 100;               // width of weekday columns and dates
+var mnCellHeight = 90;                // height of date cells 
+
+// font sizes and colors for the weekday headers (Mon, Tues, Wed...)
+var mclrHdrBg	  = mclrBorder;
+var mclrHdrText	  = mclrWhite;
+var mstrHdrFace   = "Geneva, Arial, Helvetica, Sans Serif";
+var mstrHdrSize   = "2";
+
+// font sizes and colors for date (1st, 3rd, 15th...)
+var mstrNumFace   = "Geneva, Arial, Helvetica, Sans Serif";
+var mstrNumSize   = "3";
+
+// font sizes and colors for the event text
+var mclrCellText   = mclrBorder;
+var mstrCellFace   = "Geneva, Arial, Helvetica, Sans Serif";
+var mstrCellSize   = "2";
+
+var maDaysPerMonth = new Array( 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ); 
+var maLongDays	   = new Array( "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat");
+var maLongMonths   = new Array( "January", "February", "March", "April",
+	 		"May", "June", "July", "August", 
+			"September", "October", "November", "December" );
+
+var maYear = new Array();
+var maMonth = new Array();
+var maDay = new Array();
+var maText = new Array();
+var maClrText = new Array();
+var maClrBack = new Array();
+
+var mstrBrowserName = DHTMLCal_BrowserName();
+var mstrBrowserVer = DHTMLCal_BrowserVer();
+
+// ---------------------------------------------------------------------------------------
+function DHTMLCal_SetEvent( m, d, y, strText, strClrText, strClrBack) {
+	var x = maDay.length;
+
+	maYear[x +1]   = y;
+	maMonth[x + 1] = m-1;
+	maDay[x + 1]   = d;
+	maText[x + 1]  = strText;
+	if ( strClrText != null ) maClrText[x + 1]  = strClrText;
+	if ( strClrBack != null ) maClrBack[x + 1]  = strClrBack;
+}
+
+// ---------------------------------------------------------------------------------------
+function DHTMLCal_GetEvent( m, d, y, strOption) {
+	var x = 0;
+
+	while( x < maDay.length ) {
+		if ( y == maYear[x] && m == maMonth[x] && d == maDay[x] ) {
+			if ( strOption == "text" ) return maText[x];
+			if ( strOption == "clrtext" ) return maClrText[x];
+			if ( strOption == "clrback" ) return maClrBack[x];
+			return null;
+		};
+		x++;
+	};
+	return "&nbsp";
+}
+
+// ---------------------------------------------------------------------------------------
+function DHTMLCal_CheckLeapYear(m, y) {
+	var x = 2;	
+
+	if ( m == x ) {
+        	if ( y % 4 == 0 ) {
+               		if ( y % 100 == 0) {
+                    		if ( y % 400 == 0) maDaysPerMonth[x] = 29;
+               		} else {
+                    		maDaysPerMonth[x] = 29;
+			}
+		}
+	}
+}
+
+// ---------------------------------------------------------------------------------------
+function DHTMLCal_FillMonth( m ) {
+	var strHTML = "";
+
+	for ( i=0; i<=11; i++ ) {
+		var strSelected = "";
+		if ( i == m ) strSelected = "selected";
+
+		strHTML = strHTML + "<option value='" + i + "' " + strSelected + " >" + maLongMonths[i] + "</option>" + R;
+	};
+	return strHTML;
+}
+
+// ---------------------------------------------------------------------------------------
+function DHTMLCal_FillYear( y ) {
+	var strHTML = "";
+
+	for ( i=y-1; i<=y+5; i++ ) {
+		var strSelected = "";
+		if ( i == y ) strSelected = "selected";
+
+		strHTML = strHTML + "<option value='" + i + "' " + strSelected + " >" + i + "</option>" + R;
+	};
+	return strHTML;
+}
+
+// ---------------------------------------------------------------------------------------
+function DHTMLCal_Form() {
+	var strHTML;
+	var strTag;	
+	var strHide;
+	var strOutput = "";
+
+	var m = DHTMLCal_GetDate("m");
+	var y = DHTMLCal_GetDate("y");
+
+	// ----- exit the function if user doesn't want the month or year drop-downs
+	if (mbDisplayMonthCombo==false && mbDisplayYearCombo==false) {
+	} else {
+	
+	// ----- begin form
+	strHTML = "<form name='frmCal' method='post' action=''>" + R;
+	strOutput = strOutput + strHTML;
+
+	// ----- begin table
+	strHTML = "<table align=center"
+		+ " width='" + (mnCellWidth * 7) + "'"
+		+ " >" + R;
+	strOutput = strOutput + strHTML;
+
+	// ----- month & year selector
+	strHTML = "<tr><td"
+		+ " bgcolor=" + mclrHdrBg
+		+ " ><center>" + R + R;
+	strOutput = strOutput + strHTML;
+
+	// ----- month combo
+	strTemp = " cboYear.options[frmCal.cboYear.selectedIndex].value";
+	if (mbDisplayYearCombo==false) strTemp = y.toString();
+
+	strHTML = "<select name='cboMonth'"
+		+ " onchange='DHTMLCal_Update(" + R
+		+ " cboMonth.options[frmCal.cboMonth.selectedIndex].value"
+		+ "," + R
+		+ strTemp
+		+ ");'>" + R
+		+ DHTMLCal_FillMonth(m)
+		+ "</select>" + R + R;
+	if (mbDisplayMonthCombo==true) strOutput = strOutput + strHTML;
+
+	// ----- year combo
+	strTemp = " cboMonth.options[frmCal.cboMonth.selectedIndex].value";
+	if (mbDisplayMonthCombo==false) strTemp = m.toString();
+
+	strHTML = "<select name='cboYear'"
+		+ " onchange='DHTMLCal_Update(" + R
+		+ strTemp
+		+ "," + R
+		+ " cboYear.options[frmCal.cboYear.selectedIndex].value"
+		+ ");'>" + R
+		+ DHTMLCal_FillYear(y)
+		+ "</select>" + R + R;
+	if (mbDisplayYearCombo==true)  strOutput = strOutput + "&nbsp" + strHTML;
+
+	strHTML = "</center></td></tr>" + R + "</table></form>" + R + R;
+	strOutput = strOutput + strHTML;
+
+	document.writeln(strOutput);
+	};
+}
+
+// ---------------------------------------------------------------------------------------
+function DHTMLCal_Draw() {
+	var obj;
+	var sHTML;
+
+	var m = DHTMLCal_GetDate("m");
+	var y = DHTMLCal_GetDate("y");
+
+	strHTML = DHTMLCal_Create( m, y );
+
+	if ( mstrBrowserName == "IE" ) {
+		// microsoft internet explorer (handle ver 4 & 5)
+		document.writeln(strHTML);
+	
+	} else if ( mstrBrowserName == "NS" ) {
+		if ( mstrBrowserVer < "5" ) {
+			// netscape version 4
+			document.CALLAYER.document.writeln(strHTML);
+			
+		} else {
+			// netscape version 5 and up		
+			obj = document.getElementById("CALDIV");
+			DHTMLCal_SetInnerHTML(obj, strHTML);
+		};
+	};
+}
+
+// ---------------------------------------------------------------------------------------
+function DHTMLCal_Update(m, y) {
+	var strNewText;
+	var obj;
+	var strHTML;
+
+	// write the current month and year to a cookie
+	// will expire in one hour
+	DHTMLCal_SetDate(m, y)
+
+	strHTML = DHTMLCal_Create( m, y );
+
+	if ( mstrBrowserName == "IE" ) {
+		// microsoft internet explorer (handle ver 4 & 5)
+		document.all["CALDIV"].innerHTML = strHTML;
+	
+	} else if ( mstrBrowserName == "NS" ) {
+		if ( mstrBrowserVer < "5" ) {
+			// netscape version 4
+			document.CALLAYER.document.write(strHTML);
+			document.CALLAYER.document.close();
+			
+		} else {
+			// netscape version 5 and up		
+			obj = document.getElementById("CALDIV");
+			DHTMLCal_SetInnerHTML(obj, strHTML);
+		};
+	};
+}
+
+// ---------------------------------------------------------------------------------------
+function DHTMLCal_CheckColor( nRow, nCol, x, dteCal, dteNow, m ) {
+	var strID = "c" + nCol + "r" + nRow; 
+	var currD = dteCal.getDay();
+	var currM = dteCal.getMonth();
+	var currY = dteCal.getYear();
+
+	// Is this a "dead" cell?
+	if ( currD > (nCol + x) || currM != m ) {
+		return mclrDead;
+
+	} else {
+		if ( dteCal.getYear() < dteNow.getYear()) {
+			return mclrPast;
+		} else if (dteCal.getYear() > dteNow.getYear()) {
+			return mclrFuture;
+		} else {				
+			// Same year...
+			if (dteCal.getMonth() < dteNow.getMonth() ) {
+				return mclrPast;
+			} else if (dteCal.getMonth() > dteNow.getMonth() ) {
+				return mclrFuture;
+			} else {
+				// Same month...
+				if (dteCal.getDate() < dteNow.getDate()) {
+					return mclrPast;
+				} else if (dteCal.getDate() > dteNow.getDate()) {
+					return mclrFuture;
+				} else {
+					return mclrNow;
+				}
+			}
+		}
+	}
+}
+
+// ---------------------------------------------------------------------------------------
+function DHTMLCal_Create( m, y ) {
+	var strOutput = "";
+	var strForeColor;
+	var strBackColor;
+	var strClrText;
+	var strClrBack;
+	var strHTML;
+	var strID;
+	var strCell;
+	var strNum;
+	var strText;
+	var strTag;
+	var nRow;
+	var nCol;
+	var nDeadDay;
+	var bGoodDate=false;	
+
+	var dteNow = new Date();
+	var dteCal = new Date(y, m, 1);
+	var dteMonth = new Date(y, m, 1);
+	DHTMLCal_CheckLeapYear(m, y);
+
+	// ----- find the first day and subtract back to Sun
+	dteCal.setDate( dteCal.getDate() - dteCal.getDay() );
+
+	// ----- determine the sequence of the "dead" cells
+	nDeadDay = dteMonth.getDate() - dteMonth.getDay();  
+
+	// ----- begin table
+	strHTML = "<table align=center"
+		+ " bgColor=" + mclrTableBg
+		+ " border='1'"
+		+ " bordercolor='" + mclrBorder + "'"
+		+ " bordercolordark='" + mclrBorder + "'"
+		+ " bordercolorlight='" + mclrBorder + "'"
+		+ " width='" + (mnCellWidth * 7) + "'"
+		+ " >";
+	strOutput = strOutput + strHTML + R + R;
+
+	// ----- Create the WEEKDAY headers
+	strOutput = strOutput + "<tr>" + R;
+	for( nCol = 0; nCol < 7; nCol++) {
+		strHTML = "<td align=center"
+			+ " width='" + mnCellWidth + "'"
+			+ " bgcolor=" + mclrHdrBg
+			+ " >"
+			+ DHTMLCal_FontStr( mstrHdrFace, mstrHdrSize, mclrHdrText )
+			+ " <b><center>" + maLongDays[nCol]
+			+ " </center></b></font></td>";
+		strOutput = strOutput + strHTML + R;
+	}
+	strOutput = strOutput + "</tr>" + R + R;
+
+	// ----- now create calendar grid ( 7 columns by 6 rows ) 
+	for (nRow = 0; nRow < 6; nRow++)	{
+
+		x = 0;
+		strOutput = strOutput + "<tr>";
+		for( nCol = 0; nCol < 7; nCol++) {
+
+			// ----- create unique ID
+			strID = "c" + nCol + "r" + nRow; 
+
+			// ----- determine color and text
+			strBackColor = DHTMLCal_CheckColor( nRow, nCol, x, dteCal, dteNow, m );
+
+			if (strBackColor == mclrDead) {
+				strNum = dteCal.getDate();
+				if (mbDisplayDeadNumber == false && mbDisplayDeadText == false) strNum = "&nbsp;";
+				if (mbDisplayDeadText == false){
+					strText = DHTMLCal_GetEvent(m, nDeadDay, y, "text");
+					strClrText = DHTMLCal_GetEvent(m, nDeadDay, y, "clrtext");
+					strClrBack = DHTMLCal_GetEvent(m, nDeadDay, y, "clrback");
+				} else {
+					strText = DHTMLCal_GetEvent(dteCal.getMonth(), dteCal.getDate(), dteCal.getFullYear(), "text");
+					strClrText = DHTMLCal_GetEvent(dteCal.getMonth(), dteCal.getDate(), dteCal.getFullYear(), "clrtext");
+					strClrBack = DHTMLCal_GetEvent(dteCal.getMonth(), dteCal.getDate(), dteCal.getFullYear(), "clrback");
+				};
+			} else {
+				strNum = dteCal.getDate();
+				strText = DHTMLCal_GetEvent(dteCal.getMonth(), dteCal.getDate(), dteCal.getFullYear(), "text");
+				strClrText = DHTMLCal_GetEvent(dteCal.getMonth(), dteCal.getDate(), dteCal.getFullYear(), "clrtext");
+				strClrBack = DHTMLCal_GetEvent(dteCal.getMonth(), dteCal.getDate(), dteCal.getFullYear(), "clrback");
+			};
+
+			// ----- text & color for cell
+			if (strText == "") strText=" ";
+			if ( strClrBack != null && strClrBack != "&nbsp" ) strBackColor = strClrBack;
+			strForeColor = mclrCellText;	
+			if ( strClrText != null && strClrText != "&nbsp" ) strForeColor = strClrText;			
+
+			strCell = DHTMLCal_FontStr(mstrNumFace, mstrNumSize, strForeColor) + R
+				+ "<strong>" + strNum + "</strong></font>" + R
+				+ "<br>"
+				+ DHTMLCal_FontStr(mstrCellFace, mstrCellSize, strForeColor) + R
+				+ strText + R + "</font>" + R;
+	
+			// ----- HTML for cell
+			strHTML = "<td"
+				+ " valign=top" 
+				+ " width=" + mnCellWidth 
+				+ " height=" + mnCellHeight 
+				+ " bgcolor=" + strBackColor
+				+ " >" + R; 
+			strTemp =  strHTML + strCell + "</td>" + R;
+			strOutput = strOutput + strTemp;
+
+			dteCal.setDate( dteCal.getDate() + 1 );
+			nDeadDay++
+		}
+		x = x + 7;
+		strOutput = strOutput + "</tr>" + R + R;
+	}
+	
+	strOutput = strOutput + strHTML + R + R;
+
+	// ---- end the table, form
+	strOutput = strOutput + "</table>";
+
+	return strOutput;
+}
+
+// ---------------------------------------------------------------------------------------
+function DHTMLCal_FontStr ( strFace, strSize, strColor ) {
+	var strHTML = "<font"
+		+ " face='"  + strFace  + "'"
+		+ " size='"  + strSize  + "'"
+		+ " color='" + strColor + "'"
+		+ " >";
+	return strHTML;
+}
+
+// ---------------------------------------------------------------------------------------
+function DHTMLCal_BrowserName () {
+	var strOutput="";
+	var strBrowser = navigator.appName;
+
+	if ( strBrowser=="Microsoft Internet Explorer" ) {
+		strOutput = "IE";
+	} else if ( strBrowser=="Netscape" ) {
+		strOutput = "NS";
+	};
+	return strOutput;
+}
+
+// ---------------------------------------------------------------------------------------
+function DHTMLCal_BrowserVer () {
+	var strVer = navigator.appVersion.charAt(0);
+	return strVer;
+}
+
+// ---------------------------------------------------------------------------------------
+function DHTMLCal_SetOuterHTML (obj, strHTML) {
+	var range = document.createRange();
+	range.setStartBefore(obj);
+
+	var df = range.createContextualFragment(strHTML);
+	obj.parentNode.replaceChild(df, this);
+}
+
+// ---------------------------------------------------------------------------------------
+function DHTMLCal_SetInnerHTML (obj, strHTML) {
+	var range = document.createRange();
+	range.selectNodeContents(obj);
+	range.deleteContents();
+	
+	var df = range.createContextualFragment(strHTML);
+	obj.appendChild(df);
+}
+
+// ---------------------------------------------------------------------------------------
+function DHTMLCal_SetDate (m, y) {
+	var mm = parseInt(m) + 1;
+
+	var strYear =  y.toString();
+	var strMonth = mm.toString();
+
+	if (strMonth.length==1) strMonth = "0" + strMonth;
+	// alert("write: " + strMonth + " / " + strYear);
+
+	DHTMLCal_CookieSet("dhtmlcal", strYear + strMonth);
+};
+
+// ---------------------------------------------------------------------------------------
+function DHTMLCal_GetDate (strOption) {
+	var strValue = DHTMLCal_CookieGet("dhtmlcal");
+	var m, strMonth
+	var y, strYear
+
+	if (strValue==false) {
+		var dCurrDate = new Date();
+		m = dCurrDate.getMonth();
+		y = dCurrDate.getFullYear();
+	} else {
+		strMonth = strValue.substring(4, 6);
+		strYear = strValue.substring(0, 4);
+
+		m = parseInt(strMonth);
+		y = parseInt(strYear);
+		
+		if (strMonth != m.toString()) {
+			strMonth = strMonth.substring(strMonth.lastIndexOf("0")+1,strMonth.lastIndexOf("0")+2);
+			m = parseInt(strMonth);
+		};
+	
+		m--;
+	};
+
+	//alert("read: " + strMonth + " / " + strYear);
+
+	if (strOption=="m") return m;
+	if (strOption=="y") return y;
+
+	return -1;
+};
+
+// ---------------------------------------------------------------------------------------
+function DHTMLCal_CookieSet (strName, strValue, hours, strPath, strDomain, strSecure) {
+	var numHours;
+
+	if ( (typeof(hours) == 'string') && Date.parse(hours) ) { 
+		// already a Date string
+		numHours = hours;
+	} else if (typeof(hours) == 'number') { 
+		// calculate Date from number of hours
+		numHours = (new Date((new Date()).getTime() + hours*3600000)).toGMTString();
+	};
+
+	// Set the cookie, adding any parameters that were specified.
+  	document.cookie = strName + "=" + escape(strValue)
+  		+ ((numHours == null) ? "" : "; expires=" + numHours) 
+  		+ ((strPath == null) ? "" : "; strPath=" + strPath) 
+  		+ ((strDomain == null) ? "" : "; strDomain=" + strDomain)
+  		+ ((strSecure == null) ? "" : "; strSecure");
+};
+
+// ---------------------------------------------------------------------------------------
+function DHTMLCal_CookieGet (strName) {
+	var strData;
+	var nBegin;
+	var nEnd;
+
+	var MyCookie = document.cookie;
+	
+	if (MyCookie.length>0) {
+		nBegin = MyCookie.indexOf(strName);
+		if (nBegin != -1) {
+			nBegin += strName.length;
+			nEnd = MyCookie.indexOf(";", nBegin);
+			if (nEnd==-1) nEnd = MyCookie.length;
+			strData = unescape(MyCookie.substring(nBegin+1, nEnd));
+			return strData;
+		} else {
+			//no cookie of name found		
+			return false;
+		};
+	} else {
+		//no cookie found
+		return false;
+	};
+	
+};
+
+// ---------------------------------------------------------------------------------------
+function DHTMLCal_PopUp (strHREF, bNewWindow) {
+	var winPopup;
+	var strValues="width=400,height=300,scrollbars=yes,dependent=yes";
+
+	if (bNewWindow) {
+	  	winPopup = window.open(strHREF, "_blank", strValues);  
+	} else {
+	  	winPopup = window.open("", "popup", strValues);  
+		winPopup.location.href = strHREF;
+	}
+};
+-->
+</script>
+
+<script language="JavaScript">
+<!--
+DHTMLCal_SetEvent( 9,-2,2001, "3 days from...");
+DHTMLCal_SetEvent( 9,-1,2001, "2 days from...");
+DHTMLCal_SetEvent( 9,0,2001, "1 day from...");
+DHTMLCal_SetEvent( 9,1,2001, "September First","#ffffff","#000000");
+DHTMLCal_SetEvent( 9,31,2001, "1st day after...");
+DHTMLCal_SetEvent( 9,32,2001, "2nd day after...");
+DHTMLCal_SetEvent( 9,33,2001, "3rd day after...");
+
+DHTMLCal_SetEvent( 10,-2,2001, "3 days from...");
+DHTMLCal_SetEvent( 10,-1,2001, "2 days from...");
+DHTMLCal_SetEvent( 10,0,2001, "1 day from...");
+DHTMLCal_SetEvent( 10,1,2001, "October First","#ffffff","#000000");
+DHTMLCal_SetEvent( 10,32,2001, "1st day after...");
+DHTMLCal_SetEvent( 10,33,2001, "2nd day after...");
+DHTMLCal_SetEvent( 10,34,2001, "3rd day after...");
+
+DHTMLCal_SetEvent( 11,-2,2001, "3 days from...");
+DHTMLCal_SetEvent( 11,-1,2001, "2 days from...");
+DHTMLCal_SetEvent( 11,0,2001, "1 day from...");
+DHTMLCal_SetEvent( 11,1,2001, "November First","#ffffff","#000000");
+DHTMLCal_SetEvent( 11,31,2001, "1st day after...");
+DHTMLCal_SetEvent( 11,32,2001, "2nd day after...");
+DHTMLCal_SetEvent( 11,33,2001, "3rd day after...");
+
+DHTMLCal_SetEvent( 12,-2,2001, "3 days from...");
+DHTMLCal_SetEvent( 12,-1,2001, "2 days from...");
+DHTMLCal_SetEvent( 12,0,2001, "1 day from...");
+DHTMLCal_SetEvent( 12,32,2001, "1st day after...");
+DHTMLCal_SetEvent( 12,33,2001, "2nd day after...");
+DHTMLCal_SetEvent( 12,34,2001, "3rd day after...");
+-->
+</script>
+
+    <script language="JavaScript">
+    DHTMLCal_Form();
+    </script>
+
+    <div id="CALDIV">
+    <layer name="CALLAYER">
+
+    <script language="JavaScript">
+    DHTMLCal_Draw();
+    </script>
+
+    </layer></div>
+<p>This Calendar can only be viewed with <a href="http://home.netscape.com/computing/download/index.html?cp=hophb2">
+Netscape 6.x</a> or <a href="http://www.microsoft.com/downloads/searchdl.asp?">MS Internet Explorer 5.x</a></p>
+<p>This Page will be Completed as the Construction of this site continues</p>
+
+<!--bottom Navigation -->
+<p align="center"><a href="contact.html">Contact</a> | <a href="sitemap.html">Site Map</a> | <a href="search.html">Search</a></p>
+<!--end bottome Navigation -->
+</body>
+</html>
